@@ -5,10 +5,10 @@ import BestSeller from './BestSeller'
 
 const HomeLayout = () => {
   return (
-      <div>
-          <HeroCard />
-          <AboutUs />
-          <BestSeller/>
+    <div>
+      <HeroCard />
+      <AboutUs />
+      <BestSeller />
     </div>
   )
 }

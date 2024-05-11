@@ -60,10 +60,10 @@ const Header = () => {
         }
     };
     return (
-        <div className="w-full h-20 lg:h-28 border-b-[1px] border-gray-500 text-black lg:text-white bg-white lg:bg-transparent">
+        <div className="w-full absolute h-20 lg:h-28 border-b-[1px] border-gray-500  bg-white lg:bg-transparent">
             <div className="max-w-screen-2xl h-full mx-auto px-4 flex items-center justify-between">
                 <h1 className="text-2xl uppercase font-bold">Shoppers</h1>
-                <ul className="hidden text-white lg:inline-flex items-center gap-8 uppercase text-sm font-semibold">
+                <ul className="hidden lg:inline-flex items-center gap-8 uppercase text-[14px]">
                     <li>
                         <Link href="#" className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                             Menu
@@ -86,28 +86,18 @@ const Header = () => {
                         </Link>
                     </li>
                     <li>
-                        <div className="relative">
-                            <select
-                                name="Profile"
-                                id="profile"
-                                className="appearance-none bg-transparent border-none text-white pl-3 pr-8 py-2 focus:outline-none focus:bg-blue-900 focus-within:bg-gray-700"
-                                onChange={handleSelectChange}
-                            >
-                                <option value="Profile">Profile</option>
-                                <option value="userProfile">user</option>
-                                <option value="category">Category</option>
-                                <option value="menu-items">Menu-items</option>
-                            </select>
-                            <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-                                <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
-                                    <path
-                                        fillRule="evenodd"
-                                        clipRule="evenodd"
-                                        d="M6.293 7.293a1 1 0 011.414 0L10 9.586l2.293-2.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                                    />
-                                </svg>
-                            </div>
-                        </div>
+                        <select
+                            name="Profile"
+                            id="profile"
+                            className='bg-transparent border-none focus:bg-blue-900 focus-within:bg:#154c79'
+                            onChange={handleSelectChange}
+                        >
+                            <option value="Profile">Profile</option>
+                            <option value="userProfile">user</option>
+                            <option value="category">Category</option>
+                            <option value="menu-items">Menu-items</option>
+
+                        </select>
                     </li>
                     <li>
                         {isLoggedIn ? (

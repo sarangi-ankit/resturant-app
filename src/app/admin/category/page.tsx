@@ -78,7 +78,7 @@ function Category() {
   }
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="grid max-w-2xl mx-auto mt-8">
 
         <div className='w-full pb-8 mt-8 sm:max-w-xl sm:rounded-lg flex items-center justify-between'>
@@ -87,7 +87,8 @@ function Category() {
             <DialogTrigger asChild>
               <Button className='bg-orange-500 text-white font-semibold hover:bg-orange-600' variant="outline" onClick={() => setDialogOpen(true)}>Add category</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px]" style={{ backgroundColor: "white", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
+     
               <DialogHeader>
                 <DialogTitle>Add category</DialogTitle>
 

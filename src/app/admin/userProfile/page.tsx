@@ -40,7 +40,7 @@ const UserProfile = () => {
     return (
 
         <>
-            <Header/>
+            {/* <Header/> */}
             <div className="grid max-w-2xl mx-auto mt-8">
                 <div className='w-full pb-8 mt-8 sm:max-w-xl sm:rounded-lg'>
                     <h2 className=" text-2xl font-bold sm:text-xl">Profile</h2>

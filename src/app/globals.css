@@ -2,3 +2,9 @@
   @tailwind components;
   @tailwind utilities;
 
+.bg-custom-gradient {
+  background-image: linear-gradient(to right, #1a202c, #083833);
+}
+.bg-custom-background {
+  background-image: linear-gradient(to right, #0e1118, #06201e);
+}

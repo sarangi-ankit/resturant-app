@@ -131,7 +131,7 @@ export default function MenuItems() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="grid max-w-4xl mx-auto mt-8">
         <div className="w-full pb-8 mt-8 px-4 sm:rounded-lg flex items-left justify-between">
           <h2 className="text-xl font-bold sm:text-xl">Menu-Items</h2>
@@ -139,7 +139,8 @@ export default function MenuItems() {
             <DialogTrigger asChild>
               <Button className='bg-orange-500 text-white font-semibold hover:bg-orange-600' variant="outline" onClick={() => setDialogOpen(true)}>Add Menu</Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-[425px]" style={{ backgroundColor: "white", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
+              {/* Existing content... */}
               <DialogHeader>
                 <DialogTitle>Add Menu</DialogTitle>
               </DialogHeader>

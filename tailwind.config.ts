@@ -52,6 +52,14 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        customColor: '#daa520',
+      },
+      // gradientColor: {
+       
+      //   'custom-gradient': ['to right', '#1a202c', '#4fd1c5'],
+      // },
+      fontFamily: {
+        'customFont': ['"Open Sans Condensed"', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
