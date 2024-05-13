@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
+import Specialist from '../components/Specialist';
 
 const AboutUs = () => {
   const [currentText, setCurrentText] = useState(0)
@@ -48,17 +49,21 @@ const AboutUs = () => {
         </div>
       </div>
       <div className="flex flex-col lg:flex-row items-center justify-center gap-6 mt-8 bg-custom-background">
-  <div className="flex-1">
-    <div className="text-center lg:text-center"> {/* Center text on small screens, left align on larger screens */}
-      <h2 className="text-3xl font-bold mb-4">{texts[currentText].heading}</h2>
-      <p>{texts[currentText].author}</p>
-      <p>{texts[currentText].profession}</p>
-    </div>
-  </div>
-  <div className="flex-1">
-    <img src="/images/about4.jpg" alt="Example" className="w-full h-auto" />
-  </div>
-</div>
+        <div className="flex-1">
+          <div className="text-center lg:text-center"> 
+            <h2 className="text-3xl font-bold mb-4">{texts[currentText].heading}</h2>
+            <p>{texts[currentText].author}</p>
+            <p>{texts[currentText].profession}</p>
+          </div>
+        </div>
+        <div className="flex-1">
+          <img src="/images/about4.jpg" alt="Example" className="w-full h-auto" />
+        </div>
+      </div>
+
+      <div>
+        <Specialist/>
+      </div>
 
     </div>
   );

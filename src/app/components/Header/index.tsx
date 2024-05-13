@@ -14,8 +14,8 @@ const Header = () => {
 
         if (response.ok) {
             alert("Logged out successfully");
-            localStorage.setItem('isLoggedIn', 'false'); // Set isLoggedIn to false in localStorage
-            setIsLoggedIn(false); // Update login status
+            localStorage.setItem('isLoggedIn', 'false'); 
+            setIsLoggedIn(false); 
             route.push("/login");
         } else {
             alert("Failed to logout");
@@ -60,12 +60,12 @@ const Header = () => {
         }
     };
     return (
-        <div className="w-full absolute h-20 lg:h-28 border-b-[1px] border-gray-500  bg-white lg:bg-transparent">
+        <div className="w-full h-20 lg:h-28 border-b-[1px] border-gray-500 text-white  bg-custom-gradient lg:bg-custom-gradient">
             <div className="max-w-screen-2xl h-full mx-auto px-4 flex items-center justify-between">
-                <h1 className="text-2xl uppercase font-bold">Shoppers</h1>
+                <Link href="/"><h1 className="text-2xl uppercase font-bold">Shoppers</h1></Link>
                 <ul className="hidden lg:inline-flex items-center gap-8 uppercase text-[14px]">
                     <li>
-                        <Link href="#" className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                        <Link href="/menu" className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                             Menu
                         </Link>
                     </li>
