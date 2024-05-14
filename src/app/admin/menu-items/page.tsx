@@ -172,11 +172,12 @@ export default function MenuItems() {
                   <CustomSelect
                     value={category}
                     onChange={(selectedCategoryId: string) => setCategory(selectedCategoryId)}
+                    
                   >
                     <SelectTrigger id="category" className="col-span-3 font-semibold">
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
-                    <SelectContent position="popper">
+                    <SelectContent position="popper" style={{ backgroundColor: "white"}}>
                       {categories.map((cat) => (
                         <SelectItem key={cat._id} value={cat._id}>{cat.name}</SelectItem>
                       ))}
