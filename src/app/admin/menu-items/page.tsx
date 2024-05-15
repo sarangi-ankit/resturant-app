@@ -22,6 +22,7 @@ import CustomSelect from "@/custom/CustomSelect";
 import Link from "next/link";
 import Header from "@/app/components/Header";
 
+
 interface Category {
   _id: string;
   name: string;
@@ -35,6 +36,8 @@ interface Menus {
 }
 
 export default function MenuItems() {
+  
+  
   const [dialogOpen, setDialogOpen] = useState(false);
   const [name, setName] = useState("")
   const [price, setPrice] = useState("")

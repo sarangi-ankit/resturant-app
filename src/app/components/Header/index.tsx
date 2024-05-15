@@ -1,11 +1,17 @@
 "use client"
+import { CartContext } from '@/app/context/Context';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 const Header = () => {
     const route = useRouter()
+    const context = useContext(CartContext);
+    if (!context) {
+    throw new Error("CartContext must be used within a CartProvider");
+  }
     const [isLoggedIn, setIsLoggedIn] = useState(true)
+    
 
     const handleLogout = async () => {
         const response = await fetch('/api/logout', {
@@ -59,6 +65,10 @@ const Header = () => {
                 break;
         }
     };
+
+     const calculateTotalQuantity = () => {
+    return context.state.cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
+  };
     return (
         <div className="w-full h-20 lg:h-28 border-b-[1px] border-gray-500 text-white  bg-custom-gradient lg:bg-custom-gradient">
             <div className="max-w-screen-2xl h-full mx-auto px-4 flex items-center justify-between">
@@ -81,8 +91,8 @@ const Header = () => {
                     </li>
 
                     <li>
-                        <Link href="#" className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                            Cart
+                        <Link href="/cart" className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                            Cart[{calculateTotalQuantity()}]
                         </Link>
                     </li>
                     <li>
