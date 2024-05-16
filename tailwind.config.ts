@@ -53,6 +53,7 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
         customColor: '#daa520',
+        secondaryColor:'#9C7616'
       },
       // gradientColor: {
        
