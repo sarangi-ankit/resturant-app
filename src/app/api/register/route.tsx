@@ -3,7 +3,7 @@ import connectDB from "../../../lib/db"
 import bcrypt from 'bcryptjs';
 
 export async function POST(req: any) {
-    const conn = await connectDB()
+   await connectDB()
 
     try {
         const body = await req.json();
@@ -23,11 +23,7 @@ export async function POST(req: any) {
                 {status:400}
             );
         }
-
-        // Hash password
         const hashedPassword = await bcrypt.hash(password, 12);
-        
-        // Create new user
         user = new User({
             name,
             email,

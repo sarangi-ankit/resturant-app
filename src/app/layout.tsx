@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header";
-import {CartProvider} from "./context/Context"
+import { CartProvider } from "./context/Context"
+import SessionWrapper from "./components/SessionWrapper";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,21 +19,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <SessionWrapper>
+      <html lang="en">
+        <body className={inter.className}>
+          <main>
+            <CartProvider>
+              <Header />
+              {children}
+            </CartProvider>
+          </main>
+        </body>
+      </html>
+    </SessionWrapper>
 
-
-        <main>
-          <CartProvider>
-            <Header />
-            {children}
-          </CartProvider>
-        </main>
-
-
-
-
-      </body>
-    </html>
   );
 }
