@@ -2,13 +2,17 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 
+export type SubCategory = {
+  id: string;
+  name: string;
+};
 
 export type Categories = {
   id: string,
   name: string,
   status: string,
   time: string,
-  category:[]
+  category:SubCategory[]
 }
 
 export const columns: ColumnDef<Categories>[] = [

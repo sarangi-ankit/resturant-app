@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useRouter } from 'next/navigation';
-import Header from '@/app/components/Header';
+
 
 
 function Category() {
@@ -31,20 +31,21 @@ function Category() {
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
-      const data: Categories[] = await response.json();
+      const result = await response.json();
+      const categories: Categories[] = result.category; 
 
-      return data;
+      return categories;
     } catch (error) {
       console.error('Error fetching data:', error);
       throw error;
     }
   }
 
-  useEffect(() => {
+ useEffect(() => {
     const fetchData = async () => {
       try {
         const result = await getData();
-        setData(result.category);
+        setData(result);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -67,6 +68,9 @@ function Category() {
       alert(data.message);
       if (response.ok) {
         setDialogOpen(false);
+        // Refetch the data to include the new category
+        const result = await getData();
+        setData(result);
       } else {
         alert(data.error);
       }
@@ -74,8 +78,8 @@ function Category() {
       console.error('Error:', error);
       alert('An error occurred. Please try again later.');
     }
-
   }
+
   return (
     <>
       {/* <Header /> */}
