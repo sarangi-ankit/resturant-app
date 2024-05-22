@@ -33,7 +33,7 @@ export async function GET() {
     try {
         
         const category = await Category.find();
-        console.log("category", category)
+        // console.log("category", category)
         return Response.json({ category }, { status: 200 });
     } catch (error) {
         console.error(error);

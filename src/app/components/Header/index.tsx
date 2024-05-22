@@ -4,6 +4,12 @@ import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React, { useContext, useEffect, useState } from 'react'
+import { HiOutlineShoppingCart } from "react-icons/hi";
+import { CgProfile } from "react-icons/cg";
+import FlyoutLink from '../layout/FlyoutLink';
+import FlyoutUserContent from '../layout/FlyoutUserContent';
+import FlyoutCartContent from '../layout/FlyoutCartContent';
+
 
 const Header = () => {
     const route = useRouter()
@@ -17,20 +23,6 @@ const Header = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(true)
 
 
-    const handleLogout = async () => {
-        const response = await fetch('/api/logout', {
-            method: 'POST',
-        });
-
-        if (response.ok) {
-            alert("Logged out successfully");
-            localStorage.setItem('isLoggedIn', 'false');
-            setIsLoggedIn(false);
-            route.push("/login");
-        } else {
-            alert("Failed to logout");
-        }
-    };
     useEffect(() => {
         // Check login status from localStorage when the component mounts
         const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
@@ -51,107 +43,79 @@ const Header = () => {
         }
     }, [isLoggedIn]);
 
-    const handleSelectChange = (event: any) => {
-        const selectedOption = event.target.value;
-        switch (selectedOption) {
-            case 'userProfile':
-                route.push('/admin/userProfile');
-                break;
-            case 'category':
-                route.push('/admin/category');
-                break;
-            case 'menu-items':
-                route.push('/admin/menu-items');
-                break;
-
-            default:
-
-                break;
-        }
-    };
-
     const calculateTotalQuantity = () => {
         return context.state.cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
     };
+
+    const items = calculateTotalQuantity()
+    console.log("items", items)
     return (
-        <div className="w-full h-20 lg:h-28 border-b-[1px] border-gray-500 text-white  bg-custom-gradient lg:bg-custom-gradient">
+        <nav className=" w-full h-20 lg:h-28 border-b-[1px] border-gray-500 text-white bg-custom-gradient lg:bg-custom-gradient lg:px-14">
             <div className="max-w-screen-2xl h-full mx-auto px-4 flex items-center justify-between">
-                <Link href="/"><h1 className="text-2xl uppercase font-bold">Shoppers</h1></Link>
-                <ul className="hidden lg:inline-flex items-center gap-8 uppercase text-[14px]">
-                    <li>
-                        <Link href="/menu" className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                            Menu
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="#" className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                            About
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="#" className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                            Contact
-                        </Link>
-                    </li>
-
-                    <li>
-                        {session ? (
-                            <Link href="/cart" className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                                Cart[{calculateTotalQuantity()}]
+                <Link href="/">
+                    <img
+                        src="/images/tsb.png"
+                        className='h-16 w-20'
+                    />
+                </Link>
+                <div className="flex-1 flex justify-center">
+                    <ul className="flex items-center gap-8 uppercase text-[14px]">
+                        <li>
+                            <Link href="/menu" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                                Menu
                             </Link>
-                        ) : (
-                            <Link href="/login">
-                                Cart
+                        </li>
+                        <li>
+                            <Link href="#" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                                About
                             </Link>
-                        )
-                        }
-
-                    </li>
-                    <li>
-                        {
-                            session ? (
-                                <select
-                                    name="Profile"
-                                    id="profile"
-                                    className='bg-transparent border-none focus:bg-blue-900 focus-within:bg:#154c79'
-                                    onChange={handleSelectChange}
-                                >
-                                    <option value="Profile">Profile</option>
-                                    <option value="userProfile">user</option>
-                                    <option value="category">Category</option>
-                                    <option value="menu-items">Menu-items</option>
-
-                                </select>
+                        </li>
+                        <li>
+                            <Link href="#" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                                Gallery
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="#" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                                Contact
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+                <div className="flex items-center gap-8">
+                    <ul className="flex items-center gap-8 uppercase text-[14px]">
+                        <li>
+                            {session ? (
+                                <FlyoutLink href="/cart" FlyoutContent={FlyoutCartContent}>
+                                    <HiOutlineShoppingCart style={{ width: '24px', height: '24px' }} />
+                                    <span className="bg-red-500 font-bold absolute -top-2 -right-2 bg-primary text-white text-xs w-5 h-5 flex items-center justify-center rounded-full leading-none">
+                                        {calculateTotalQuantity()}
+                                    </span>
+                                </FlyoutLink>
                             ) : (
                                 <Link href="/login">
-                                    Profile
+                                    <HiOutlineShoppingCart style={{ width: '24px', height: '24px' }} />
                                 </Link>
-                            )
-                        }
-
-                    </li>
-                    <li>
-                        {session ? (
-                            <button
-                                className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                                onClick={() => signOut({ callbackUrl: '/login' })}
-                            >
-                                Logout
-                            </button>
-                        ) : (
-                            <Link href="/login" passHref className="block py-2 px-3 md:p-0  rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                                Login
-                            </Link>
-                        )}
-                    </li>
-                </ul>
-                <div className="hidden lg:inline-flex gap-8 items-center">
-                    <button className="w-48 h-14 bg-white text-black uppercase text-sm font-semibold rounded-md hover:bg-darkRed hover:text-white duration-300">
-                        Get in Touch
-                    </button>
+                            )}
+                        </li>
+                        <li className="flex items-center space-x-2">
+                            <div className="text-white">
+                                <CgProfile size={24} />
+                            </div>
+                            {session ? (
+                                <FlyoutLink href="#" FlyoutContent={FlyoutUserContent}>
+                                    Hi {session?.user?.name?.slice(0, 5)}...
+                                </FlyoutLink>
+                            ) : (
+                                <Link href="/login" className="text-white">
+                                    Login
+                                </Link>
+                            )}
+                        </li>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </nav >
     );
 };
 

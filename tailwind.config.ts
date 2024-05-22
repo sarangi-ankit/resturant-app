@@ -18,6 +18,11 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        metropolis: ['"Metropolis"', 'sans-serif'],
+        miniver: ['Miniver', 'sans-serif'],
+        buttonFont:["Open Sans Condensed", "sans-serif"]
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -53,15 +58,16 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
         customColor: '#daa520',
-        secondaryColor:'#9C7616'
+        secondaryColor: '#9C7616',
+        customFont:'Josefin Sans'
       },
       // gradientColor: {
        
       //   'custom-gradient': ['to right', '#1a202c', '#4fd1c5'],
       // },
-      fontFamily: {
-        'customFont': ['"Open Sans Condensed"', 'sans-serif'],
-      },
+      // fontFamily: {
+      //   'customFont': ['"Open Sans Condensed"', 'sans-serif'],
+      // },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

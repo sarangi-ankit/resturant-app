@@ -22,13 +22,12 @@ export const authOptions: NextAuthOptions = {
         try {
           await connectDB()
           const user = await User.findOne({ email })
-          console.log("user",user)
+          // console.log("user",user)
           if (!user) {
             return null
           }
           const passwordCompare = await bcrypt.compare(password, user.password)
-          console.log("password",password)
-          console.log("passwordCompare",passwordCompare)
+          
           if (!passwordCompare) {
             return null
           }
@@ -53,6 +52,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account }: { user: any; account: any }) {
       if (account.provider === "google") {
+        console.log("clicked")
         try {
           const { name, email } = user;
           await connectDB();
@@ -64,6 +64,7 @@ export const authOptions: NextAuthOptions = {
             name: name,
             email: email,
           });
+          console.log("newuser",newUser)
           const res = await newUser.save(); 
           console.log("res",res)
           if (res.status === 200 || res.status === 201) {
