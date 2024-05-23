@@ -10,6 +10,18 @@
   font-family: "Miniver";
   src: url("/font/Miniver-Regular.ttf") format("truetype");
 }
+@font-face {
+  font-family: "CaviarDreams";
+  src: url("/font/CaviarDreams_Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "JosefinSans";
+  src: url("/font/JosefinSans-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "PTSansNarrow";
+  src: url("/font/PTSansNarrow-Regular.ttf") format("truetype");
+}
 
 .bg-custom-gradient {
   background-image: linear-gradient(to right, #1a202c, #083833);

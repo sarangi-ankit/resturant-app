@@ -21,7 +21,10 @@ const config: Config = {
       fontFamily: {
         metropolis: ['"Metropolis"', 'sans-serif'],
         miniver: ['Miniver', 'sans-serif'],
-        buttonFont:["Open Sans Condensed", "sans-serif"]
+        buttonFont: ["PTSansNarrow", "sans-serif"],
+        subFont: ["CaviarDreams", "sans-serif"],
+        customFont: ["JosefinSans", "sans-serif"],
+        menuFont:["CaviarDreams", "sans-serif"]
       },
       colors: {
         border: "hsl(var(--border))",
@@ -57,9 +60,9 @@ const config: Config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        customColor: '#daa520',
+        customColor: '#c9ab81',
         secondaryColor: '#9C7616',
-        customFont:'Josefin Sans'
+        
       },
       // gradientColor: {
        

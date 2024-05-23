@@ -29,7 +29,7 @@ const Banner = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentImage((currentImage) => (currentImage + 1) % images.length);
-        }, 5000); // Change image every 5 seconds
+        }, 5000); 
 
         return () => clearInterval(interval);
     }, []);
@@ -42,7 +42,7 @@ const Banner = () => {
                 className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover"
             />
 
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center px-4">
+            <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-center px-4">
                 
                 <AnimatedText
                     text={texts[currentImage].description1}
@@ -59,7 +59,7 @@ const Banner = () => {
                     className='font-customFont lg:mx-60 lg:mt-10 text-white text-xs md:text-base lg:text-lg xl:text-[20px] tracking-wider'
                 />
 
-                <button className=" mt-10 py-2 px-6 md:py-3 md:px-8 lg:py-4 lg:px-12 bg-transparent border border-customColor text-white rounded transition hover:bg-white hover:text-black">
+                <button className="font-buttonFont tracking-[3px] mt-10 py-2 px-6 md:py-3 md:px-8 lg:py-4 lg:px-12 bg-transparent border border-customColor text-white rounded transition hover:bg-white hover:text-black">
                     View More
                 </button>
             </div>
