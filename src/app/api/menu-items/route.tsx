@@ -70,7 +70,7 @@ export async function DELETE(req: any) {
     try {
         const conn = await connectDB();
         const url = new URL(req.url, `http://${req.headers.host}`);
-        // console.log("url", url)
+        console.log("url", url)
         const _id = url.searchParams.get('_id');
         console.log("id", _id)
         await Menu.deleteOne({_id})

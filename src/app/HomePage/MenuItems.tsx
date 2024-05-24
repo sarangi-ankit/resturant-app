@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Link from 'next/link';
 
 const MenuItems = () => {
   const { ref, inView } = useInView({
@@ -10,7 +11,7 @@ const MenuItems = () => {
   });
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { opacity: 0, y: 100 },
     visible: { opacity: 1, y: 0 },
   };
 
@@ -26,7 +27,7 @@ const MenuItems = () => {
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
             variants={itemVariants}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
+            transition={{ duration: 1, delay: index * 0.2 }}
             whileHover={{ scale: 1.08 }}
           >
             <img
@@ -40,6 +41,14 @@ const MenuItems = () => {
             </div>
           </motion.div>
         ))}
+      </div>
+      <div className="flex justify-center mt-10">
+        <Link href="/menu">
+          <button className="font-buttonFont bg-transparent border border-customColor text-white py-4 px-12 rounded hover:bg-white hover:text-black">
+            View All
+          </button>
+        </Link>
+
       </div>
     </div>
   );

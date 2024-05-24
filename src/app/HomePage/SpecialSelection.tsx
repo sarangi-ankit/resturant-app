@@ -34,13 +34,13 @@ const SpecialSelection = () => {
 
                     </div>
                 ))}
-                
+
             </div>
             <div className="flex justify-center mt-10">
-                    <button className="font-buttonFont bg-transparent border border-customColor text-white py-4 px-12 rounded hover:bg-white hover:text-black">
-                        View All
-                    </button>
-                </div>
+                <button className="font-buttonFont bg-transparent border border-customColor text-white py-4 px-12 rounded hover:bg-white hover:text-black">
+                    View All
+                </button>
+            </div>
 
         </div>
     );

@@ -26,7 +26,7 @@ const Specialist = () => {
         initial="hidden"
         animate={inView ? "visible" : "hidden"}
         variants={imageVariants}
-        transition={{ duration: 1 }}
+        transition={{ duration: 2 }}
       >
         <img src="/images/about5.jpg" alt="Specialist" className="w-full h-auto lg:mx-auto lg:px-16" />
       </motion.div>
