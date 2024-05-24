@@ -6,9 +6,14 @@ import React, { useState } from 'react'
 
 const UserProfile = () => {
     const route = useRouter()
+    const [image, setImage] = useState("")
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [phone, setPhone] = useState("")
+    const [adress, setAdress] = useState("")
+    const [postal, setPostal] = useState()
+    const [city, setCity] = useState("")
+    const [country, setCountry] = useState("")
 
 
     const handleUpdate = async (e: any) => {
@@ -19,7 +24,7 @@ const UserProfile = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, email, password }),
+                body: JSON.stringify({ name, phone, adress, postal, city, country }),
 
             });
 
@@ -40,7 +45,7 @@ const UserProfile = () => {
     return (
 
         <>
-            {/* <Header/> */}
+
             <div className="grid max-w-2xl mx-auto mt-8">
                 <div className='w-full pb-8 mt-8 sm:max-w-xl sm:rounded-lg'>
                     <h2 className=" text-2xl font-bold sm:text-xl">Profile</h2>
@@ -79,7 +84,7 @@ const UserProfile = () => {
                         />
                     </div>
 
-                    {/* Input field for email */}
+                   
                     <div className="mb-2 sm:mb-6">
                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Email</label>
                         <input
@@ -93,43 +98,72 @@ const UserProfile = () => {
                         />
                     </div>
 
-                    {/* Input field for password */}
-                    <div className="mb-2 sm:mb-6">
-                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
-                            placeholder="Enter your password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
+                    <div className='w-full flex gap-5'>
+                        <div className="w-1/2 mb-2 sm:mb-6">
+                            <label htmlFor="phone" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Phone</label>
+                            <input
+                                type="number"
+
+                                className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                                placeholder="Enter your number"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="w-1/2 mb-2 sm:mb-6">
+                            <label htmlFor="country" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                                Country
+                            </label>
+                            <input
+                                type="text"
+                                className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                                placeholder="Enter Country"
+
+
+                            />
+                        </div>
+
                     </div>
 
-                    {/* Input field for profession */}
-                    <div className="mb-2 sm:mb-6">
-                        <label htmlFor="profession" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Profession</label>
-                        <input
-                            type="text"
-                            id="profession"
-                            className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
-                            placeholder="Enter your profession"
 
-
-                        />
-                    </div>
 
                     {/* Input field for address */}
                     <div className="mb-6">
                         <label htmlFor="address" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Address</label>
                         <textarea
-                            id="address"
                             className="block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500"
                             placeholder="Write your address here..."
 
                         ></textarea>
                     </div>
+
+                    <div className='flex w-full gap-6'>
+                        <div className="w-1/2 mb-2 sm:mb-6">
+                            <label htmlFor="postal" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Postal Code</label>
+                            <input
+                                type="number"
+                                className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                                placeholder="Enter postal code"
+
+
+                            />
+                        </div>
+                        <div className="w-1/2 mb-2 sm:mb-6">
+                            <label htmlFor="city" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">
+                                City
+                            </label>
+                            <input
+                                type="text"
+                                className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                                placeholder="Enter city"
+
+
+                            />
+                        </div>
+                    </div>
+
+
 
                     {/* Submit button */}
                     <div className="flex justify-end">

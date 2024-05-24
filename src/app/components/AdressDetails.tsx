@@ -52,7 +52,7 @@ const AddressDetails = () => {
                 </div>
                 <button
                     type="submit"
-                    className="bg-customColor text-white font-medium py-2 px-4 rounded hover:bg-secondaryColor">
+                    className="bg-secondaryColor text-white font-medium py-2 px-4 rounded hover:bg-customColor">
                     Proceed to Checkout
                 </button>
             </form>
