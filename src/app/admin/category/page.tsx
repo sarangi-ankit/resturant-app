@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -9,10 +9,9 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 export type Category = {
   _id: string;
@@ -21,22 +20,20 @@ export type Category = {
 };
 
 const Category = () => {
-
   const [data, setData] = useState<Category[]>([]);
-  const [name, setName] = useState("")
+  const [name, setName] = useState("");
   const [image, setImage] = useState<File | undefined>(undefined);
+  const [previewUrl, setPreviewUrl] = useState<string | undefined>(undefined);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   async function getData() {
     try {
       const response = await fetch('/api/category');
-
       if (!response.ok) {
         throw new Error('Failed to fetch data');
       }
       const result = await response.json();
       const categories = result.category;
-
       return categories;
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -57,27 +54,22 @@ const Category = () => {
     fetchData();
   }, []);
 
-  console.log("result", data)
   const addCategory = async () => {
     try {
       let imageUrl = '';
 
-      // Convert the selected image to a data URL
       if (image) {
         const reader = new FileReader();
         reader.onload = () => {
           if (typeof reader.result === 'string') {
-            imageUrl = reader.result; // Get the data URL of the uploaded image
+            imageUrl = reader.result;
           } else {
-            // Handle other cases, e.g., ArrayBuffer or null
             console.error('Unsupported result type:', typeof reader.result);
           }
-          // Once the data URL is available, proceed with adding the menu
           addCategoryDataUrl(imageUrl);
         };
-        reader.readAsDataURL(image); // Read the uploaded image as data URL
+        reader.readAsDataURL(image);
       } else {
-        // If no image is selected, proceed with adding the menu without an image
         addCategoryDataUrl(imageUrl);
       }
     } catch (error) {
@@ -167,9 +159,13 @@ const Category = () => {
                     if (e.target.files && e.target.files.length > 0) {
                       const selectedImage = e.target.files[0];
                       setImage(selectedImage);
+                      setPreviewUrl(URL.createObjectURL(selectedImage));
                     }
                   }}
                 />
+                {previewUrl && (
+                  <img src={previewUrl} alt="Image Preview" className="mt-4 w-32 h-32 object-cover" />
+                )}
               </div>
               <DialogFooter className="flex justify-end px-6 pb-4">
                 <Button type="submit" onClick={addCategory}>Add</Button>
@@ -185,7 +181,6 @@ const Category = () => {
           </div>
           <input type="text" id="table-search-users" className="block w-full md:w-80 p-2 pl-10 text-sm text-white border bg-transparent rounded-lg" placeholder="Search for users" />
         </div>
-
       </div>
       <table className="w-full text-sm text-left text-white mx-10">
         <thead className="text-xs text-white uppercase bg-gray-700">
@@ -202,7 +197,6 @@ const Category = () => {
             <th scope="col" className="px-6 py-3">
               Name
             </th>
-
             <th scope="col" className="px-6 py-3">
               Action
             </th>
@@ -219,12 +213,10 @@ const Category = () => {
               </td>
               <th scope="row" className="flex items-center px-6 py-4 text-white whitespace-nowrap">
                 <img className="w-10 h-10 rounded-full" src={product.image} alt="Profile" />
-
               </th>
               <td className="px-6 py-4">
                 {product.name}
               </td>
-
               <td className="px-6 py-4 flex space-x-2">
                 <button className="font-medium text-blue-500 hover:underline">Edit</button>
                 <button

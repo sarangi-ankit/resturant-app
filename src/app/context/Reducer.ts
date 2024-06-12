@@ -4,7 +4,7 @@ interface CartItem {
   name: string;
   image: string;
   quantity: number;
-  price: string;
+  price: number;
 }
 
 interface CartState {
@@ -20,6 +20,7 @@ type Action =
   | { type: "REMOVE_FROM_CART"; payload: string }
   | { type: "CART_QUANTITY"; payload: { _id: string; quantity: number } }
   | { type: "INITIALIZE_CART"; payload: CartItem[] }
+  | { type: "CLEAR_CART" }
 
 
 const cartReducer = (state: CartState, action: Action): CartState => {
@@ -67,6 +68,10 @@ const cartReducer = (state: CartState, action: Action): CartState => {
       return { ...state, cart: action.payload };
     default:
       return state;
+    
+    case "CLEAR_CART":
+      localStorage.removeItem("cart");
+      return { ...state, cart: [] };
   }
 };
 

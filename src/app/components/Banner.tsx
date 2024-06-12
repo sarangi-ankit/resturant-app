@@ -51,7 +51,7 @@ const Banner = () => {
                 
                    <AnimatedText
                     text={texts[currentImage].heading}
-                    className="font-metropolis text-center text-[40px] md:text-4xl lg:text-[73px] xl:text-[75px] mt-4 mb-4 tracking-widest lg:tracking-[25px]"
+                    className="font-metropolis text-[40px] md:text-4xl lg:text-[73px] xl:text-[75px] mt-4 mb-4 tracking-widest lg:tracking-[25px]"
                 /> 
             
                 <AnimatedText 

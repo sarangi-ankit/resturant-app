@@ -7,7 +7,7 @@ import { cartReducer } from '../context/Reducer'; // Importing your cartReducer
 interface CartItemType {
     _id: string;
     name: string;
-    price: string;
+    price: number;
     image: string;
     quantity: number;
 }
@@ -28,7 +28,7 @@ const CartItem = () => {
     }, [state.cart]);
 
     useEffect(() => {
-        const totalPrice = cartItems.reduce((total, item) => total + parseFloat(item.price) * (item.quantity), 0);
+        const totalPrice = cartItems.reduce((total, item) => total + (item.price) * (item.quantity), 0);
         setTotal(totalPrice);
     }, [cartItems]);
 
@@ -66,7 +66,7 @@ const CartItem = () => {
 
                                 <div>
                                     <h2 className="text-xl font-semibold">{item.name}</h2>
-                                    <p>${parseFloat(item.price).toFixed(2)}</p>
+                                    <p>{item.price}.00</p>
                                 </div>
                             </div>
 
@@ -78,9 +78,9 @@ const CartItem = () => {
                     {cartItems.length === 0 && <p className="text-center mt-4">Your cart is empty</p>}
                 </div>
                 <div className="mt-4 text-xl tracking-wider flex-col">
-                    <p>SubTotal: ${total.toFixed(2)}</p>
-                    <p>Delivery: ${deliveryCharge.toFixed(2)}</p>
-                    <p>Total: ${totalWithDelivery}</p>
+                    <p>SubTotal: {total.toFixed(2)}</p>
+                    <p>Delivery: {deliveryCharge.toFixed(2)}</p>
+                    <p>Total: {totalWithDelivery}</p>
                 </div>
             </div>
         </div>
