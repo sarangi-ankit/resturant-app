@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useState } from 'react';
 interface CartItemType {
     _id: string;
     name: string;
-    price: string;
+    price: number;
     image: string;
     quantity: number;
 }
@@ -24,7 +24,7 @@ const FlyoutCartContent = () => {
 
     useEffect(() => {
         setCartItems(state.cart as CartItemType[]);
-        setTotal(state.cart.reduce((acc, item) => acc + parseFloat(item.price) * item.quantity, 0));
+        setTotal(state.cart.reduce((acc, item) => acc + item.price * item.quantity, 0));
     }, [state.cart]);
 
     return (
