@@ -14,6 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -21,6 +22,7 @@ import { useEffect, useState } from "react";
 import CustomSelect from "@/custom/CustomSelect";
 import Link from "next/link";
 import Header from "@/app/components/Header";
+import ImagePreview from "@/app/components/layout/ImagePreview";
 
 
 interface Category {
@@ -36,12 +38,13 @@ interface Menus {
 }
 
 export default function MenuItems() {
-  
-  
+
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [name, setName] = useState("")
   const [price, setPrice] = useState("")
   const [desc, setDesc] = useState("")
+  const [link, setLink] = useState("");
   const [image, setImage] = useState<File | undefined>(undefined);
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState<Category[]>([])
@@ -66,36 +69,36 @@ export default function MenuItems() {
     }
   };
 
+  // const addMenu = async () => {
+  //   try {
+  //     let imageDataUrl = '';
+
+  //     // Convert the selected image to a data URL
+  //     if (image) {
+  //       const reader = new FileReader();
+  //       reader.onload = () => {
+  //         if (typeof reader.result === 'string') {
+  //           imageDataUrl = reader.result; // Get the data URL of the uploaded image
+  //         } else {
+  //           // Handle other cases, e.g., ArrayBuffer or null
+  //           console.error('Unsupported result type:', typeof reader.result);
+  //         }
+  //         // Once the data URL is available, proceed with adding the menu
+  //         addMenuWithDataUrl(imageDataUrl);
+  //       };
+  //       reader.readAsDataURL(image); // Read the uploaded image as data URL
+  //     } else {
+  //       // If no image is selected, proceed with adding the menu without an image
+  //       addMenuWithDataUrl(imageDataUrl);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     alert('An error occurred. Please try again later.');
+  //   }
+  // }
+
+
   const addMenu = async () => {
-    try {
-      let imageDataUrl = '';
-
-      // Convert the selected image to a data URL
-      if (image) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          if (typeof reader.result === 'string') {
-            imageDataUrl = reader.result; // Get the data URL of the uploaded image
-          } else {
-            // Handle other cases, e.g., ArrayBuffer or null
-            console.error('Unsupported result type:', typeof reader.result);
-          }
-          // Once the data URL is available, proceed with adding the menu
-          addMenuWithDataUrl(imageDataUrl);
-        };
-        reader.readAsDataURL(image); // Read the uploaded image as data URL
-      } else {
-        // If no image is selected, proceed with adding the menu without an image
-        addMenuWithDataUrl(imageDataUrl);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
-    }
-  }
-
-
-  const addMenuWithDataUrl = async (imageDataUrl: any) => {
     try {
       const response = await fetch('/api/menu-items', {
         method: 'POST',
@@ -106,7 +109,7 @@ export default function MenuItems() {
           name: name,
           description: desc,
           price: price,
-          image: imageDataUrl,
+          image: link,
           category: category
         }),
       });
@@ -143,7 +146,7 @@ export default function MenuItems() {
               <Button className='bg-orange-500 text-white font-semibold hover:bg-orange-600' variant="outline" onClick={() => setDialogOpen(true)}>Add Menu</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]" style={{ backgroundColor: "white", boxShadow: "0 4px 6px rgba(0,0,0,0.1)" }}>
-         
+
               <DialogHeader>
                 <DialogTitle>Add Menu</DialogTitle>
               </DialogHeader>
@@ -175,12 +178,12 @@ export default function MenuItems() {
                   <CustomSelect
                     value={category}
                     onChange={(selectedCategoryId: string) => setCategory(selectedCategoryId)}
-                    
+
                   >
                     <SelectTrigger id="category" className="col-span-3 font-semibold">
                       <SelectValue placeholder="Select Category" />
                     </SelectTrigger>
-                    <SelectContent position="popper" style={{ backgroundColor: "white"}}>
+                    <SelectContent position="popper" style={{ backgroundColor: "white" }}>
                       {categories.map((cat) => (
                         <SelectItem key={cat._id} value={cat._id}>{cat.name}</SelectItem>
                       ))}
@@ -196,20 +199,14 @@ export default function MenuItems() {
                     className="col-span-3 font-semibold"
                     onChange={(e) => setDesc(e.target.value)}
                   />
-                  <label htmlFor="image" className="text-right font-bold">
-                    Upload Image:
-                  </label>
-                  <input
-                    type="file"
-                    id="image"
-                    className="col-span-3"
-                    onChange={(e) => {
-                      if (e.target.files && e.target.files.length > 0) {
-                        const selectedImage = e.target.files[0];
-                        setImage(selectedImage);
-                      }
-                    }}
-                  />
+                  <div className="col-span-2">
+
+                    <Label htmlFor="image" className=" text-right font-bold">
+                      Upload Image:
+                    </Label>
+                    <ImagePreview link={link} setLink={setLink} />
+
+                  </div>
                 </div>
               </div>
               <DialogFooter>

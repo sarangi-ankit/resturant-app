@@ -1,4 +1,5 @@
-"use client"
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import ImagePreview from "../../components/layout/ImagePreview"
 
 export type Category = {
   _id: string;
@@ -22,8 +24,7 @@ export type Category = {
 const Category = () => {
   const [data, setData] = useState<Category[]>([]);
   const [name, setName] = useState("");
-  const [image, setImage] = useState<File | undefined>(undefined);
-  const [previewUrl, setPreviewUrl] = useState<string | undefined>(undefined);
+  const [link, setLink] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
 
   async function getData() {
@@ -56,36 +57,12 @@ const Category = () => {
 
   const addCategory = async () => {
     try {
-      let imageUrl = '';
-
-      if (image) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          if (typeof reader.result === 'string') {
-            imageUrl = reader.result;
-          } else {
-            console.error('Unsupported result type:', typeof reader.result);
-          }
-          addCategoryDataUrl(imageUrl);
-        };
-        reader.readAsDataURL(image);
-      } else {
-        addCategoryDataUrl(imageUrl);
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred. Please try again later.');
-    }
-  }
-
-  const addCategoryDataUrl = async (imageUrl: any) => {
-    try {
       const response = await fetch('/api/category', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, image: imageUrl }),
+        body: JSON.stringify({ name, image: link }),
       });
       const data = await response.json();
       alert(data.message);
@@ -93,6 +70,7 @@ const Category = () => {
         setDialogOpen(false);
         const result = await getData();
         setData(result);
+        
       } else {
         alert(data.error);
       }
@@ -148,24 +126,12 @@ const Category = () => {
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
-                <label htmlFor="image" className="text-right font-bold">
-                  Upload Image:
-                </label>
-                <input
-                  type="file"
-                  id="image"
-                  className="col-span-3"
-                  onChange={(e) => {
-                    if (e.target.files && e.target.files.length > 0) {
-                      const selectedImage = e.target.files[0];
-                      setImage(selectedImage);
-                      setPreviewUrl(URL.createObjectURL(selectedImage));
-                    }
-                  }}
-                />
-                {previewUrl && (
-                  <img src={previewUrl} alt="Image Preview" className="mt-4 w-32 h-32 object-cover" />
-                )}
+                <div>
+                  <Label htmlFor="image" className="text-right font-bold">
+                    Upload Image:
+                  </Label>
+                  <ImagePreview link={link} setLink={setLink} />
+                </div>
               </div>
               <DialogFooter className="flex justify-end px-6 pb-4">
                 <Button type="submit" onClick={addCategory}>Add</Button>
