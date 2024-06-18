@@ -13,7 +13,7 @@ export async function POST(req: any) {
         const session = await getServerSession(authOptions);
         const userId = session?.user?.email;
 
-        console.log("userEmail", userId);
+        // console.log("userEmail", userId);
         const subTotal = cart.reduce((total: any, item: any) => total + (item.price) * (item.quantity), 0)
         const deliveryFee = 5.00
         const totalAmount=subTotal+deliveryFee

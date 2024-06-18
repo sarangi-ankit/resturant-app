@@ -45,9 +45,9 @@ export async function DELETE(req: any) {
     try {
         await connectDB();
         const url = new URL(req.url, `http://${req.headers.host}`);
-        console.log("url", url)
+        // console.log("url", url)
         const _id = url.searchParams.get('_id');
-        console.log("id", _id)
+        // console.log("id", _id)
         await Category.deleteOne({_id})
         return Response.json({ message: "category deleted successfully" },{status:200})
     } catch (error) {

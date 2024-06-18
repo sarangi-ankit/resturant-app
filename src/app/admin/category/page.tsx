@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import ImagePreview from "../../components/layout/ImagePreview"
+import CustomLoader from '@/app/components/layout/CustomLoader';
 
 export type Category = {
   _id: string;
@@ -26,6 +27,7 @@ const Category = () => {
   const [name, setName] = useState("");
   const [link, setLink] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [loader,setLoader]=useState<boolean>(true)
 
   async function getData() {
     try {
@@ -47,6 +49,7 @@ const Category = () => {
       try {
         const result = await getData();
         setData(result);
+        setLoader(false)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -99,6 +102,13 @@ const Category = () => {
     }
   }
 
+  if (loader) {
+    return (
+            <div className="flex justify-center items-center min-h-screen">
+                <CustomLoader/>
+            </div>
+        );
+  }
   return (
     <div className="h-screen relative overflow-x-auto shadow-md sm:rounded-lg bg-custom-gradient">
       <div className="flex items-center justify-between flex-col md:flex-row space-y-4 md:space-y-0 pb-4 my-10 px-4 md:px-20">
@@ -145,7 +155,7 @@ const Category = () => {
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
             </svg>
           </div>
-          <input type="text" id="table-search-users" className="block w-full md:w-80 p-2 pl-10 text-sm text-white border bg-transparent rounded-lg" placeholder="Search for users" />
+          <input type="text" id="table-search-users" className="block w-full md:w-80 p-2 pl-10 text-sm text-white border bg-transparent rounded-lg" placeholder="Search for Category" />
         </div>
       </div>
       <table className="w-full text-sm text-left text-white mx-10">

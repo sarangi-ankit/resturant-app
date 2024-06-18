@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/Context';
 import { MdDeleteOutline } from "react-icons/md";
 import { cartReducer } from '../context/Reducer'; // Importing your cartReducer
+import AdressDetails from './AddressDetails';
 
 interface CartItemType {
     _id: string;
@@ -22,9 +23,10 @@ const CartItem = () => {
     const { state, dispatch } = context;
     const [cartItems, setCartItems] = useState<CartItemType[]>(state.cart as CartItemType[]);
     const [total, setTotal] = useState<number>(0);
-
+    
     useEffect(() => {
         setCartItems(state.cart as CartItemType[]);
+       
     }, [state.cart]);
 
     useEffect(() => {
@@ -47,11 +49,12 @@ const CartItem = () => {
         dispatch({ type: "CART_QUANTITY", payload: { _id: itemId, quantity: 1 } });
     }
 
+    
     return (
         <div className="min-h-screen bg-custom-gradient flex justify-center items-center">
             <div className="max-w-3xl w-full p-4 rounded shadow-lg">
                 <div className="h-96 overflow-y-auto">
-                    {cartItems.map(item => (
+                    {cartItems.length>0 && cartItems.map(item => (
                         <div key={item._id} className="flex items-center justify-between border-b border-gray-200 py-4">
                             <div className="flex items-center">
                                 <div>
@@ -75,7 +78,7 @@ const CartItem = () => {
                             </button>
                         </div>
                     ))}
-                    {cartItems.length === 0 && <p className="text-center mt-4">Your cart is empty</p>}
+                    
                 </div>
                 <div className="mt-4 text-xl tracking-wider flex-col">
                     <p>SubTotal: {total.toFixed(2)}</p>
@@ -83,7 +86,10 @@ const CartItem = () => {
                     <p>Total: {totalWithDelivery}</p>
                 </div>
             </div>
+            
         </div>
+        
+                        
     );
 }
 

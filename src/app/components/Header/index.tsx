@@ -21,7 +21,7 @@ const Header = () => {
         throw new Error("CartContext must be used within a CartProvider");
     }
     const [isLoggedIn, setIsLoggedIn] = useState(true)
-
+    const [isAdmin,setIsAdmin]=useState<boolean>(false)
 
     useEffect(() => {
         // Check login status from localStorage when the component mounts
@@ -31,8 +31,16 @@ const Header = () => {
         } else {
             setIsLoggedIn(false);
         }
-    }, []);
-
+        if (session && session.user) {
+            fetch(`/api/profile/${session.user.email}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("data",data)
+                    setIsAdmin(data.admin);
+                });
+        }
+    }, [session]);
+    console.log("admin",isAdmin)
     useEffect(() => {
         // This will run every time `isLoggedIn` changes
         if (!isLoggedIn) {
@@ -47,38 +55,38 @@ const Header = () => {
         return context.state.cart.reduce((total, cartItem) => total + cartItem.quantity, 0);
     };
 
-    const items = calculateTotalQuantity()
-    console.log("items", items)
+    
+    // console.log("items", items)
     return (
         <nav className=" w-full h-20 lg:h-28 border-b-[1px] border-gray-500 text-white bg-custom-gradient lg:bg-custom-gradient lg:px-14">
             <div className="max-w-screen-2xl h-full mx-auto px-4 flex items-center justify-between">
                 <Link href="/">
                     <img
-                        src="/images/tsb.png"
-                        className='h-16 w-20'
+                        src="/images/logo.png"
+                        className='h-16 w-13'
                     />
                 </Link>
                 <div className="flex-1 flex justify-center">
                     <ul className="flex items-center gap-8 uppercase text-[14px]">
                         <li>
-                            <Link href="/menu" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                            <Link href="/menu" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-secondaryColor">
                                 Menu
                             </Link>
                         </li>
                         <li>
                             <Link
                                 href="/about"
-                                className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                                className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-secondaryColor dark:text-white">
                                 About
                             </Link>
                         </li>
                         <li>
-                            <Link href="#" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                            <Link href="#" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-secondaryColor dark:text-white">
                                 Gallery
                             </Link>
                         </li>
                         <li>
-                            <Link href="#" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                            <Link href="#" className="block py-2 px-3 md:p-0 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-secondaryColor dark:text-white">
                                 Contact
                             </Link>
                         </li>

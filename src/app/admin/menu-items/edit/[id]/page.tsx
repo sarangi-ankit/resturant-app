@@ -114,11 +114,11 @@ const EditMenu = () => {
         }
     }
     return (
-        <>
-            {/* <Header /> */}
+        <div className='h-screen relative overflow-x-auto shadow-md sm:rounded-lg bg-custom-gradient'>
+       
             <div className="grid max-w-2xl mx-auto mt-8 font-bold">
                 <div className='w-full pb-8 mt-8 sm:max-w-xl sm:rounded-lg'>
-                    <h2 className=" text-2xl font-bold sm:text-xl">Edit Menu</h2>
+                    <h2 className="text-white text-2xl font-bold sm:text-xl">Edit Menu</h2>
                 </div>
 
                 <div className="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
@@ -127,7 +127,7 @@ const EditMenu = () => {
                         src={image}
                         alt={name} />
 
-                    <div className="flex flex-col space-y-5 sm:ml-8">
+                    {/* <div className="flex flex-col space-y-5 sm:ml-8">
                         <button type="button"
                             className="py-3.5 px-7 text-base font-medium text-indigo-100 focus:outline-none bg-[#202142] rounded-lg border border-indigo-200 hover:bg-indigo-900 focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
                             Change picture
@@ -136,7 +136,7 @@ const EditMenu = () => {
                             className="py-3.5 px-7 text-base font-medium text-indigo-900 focus:outline-none bg-white rounded-lg border border-indigo-200 hover:bg-indigo-100 hover:text-[#202142] focus:z-10 focus:ring-4 focus:ring-indigo-200 ">
                             Delete picture
                         </button>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="items-center mt-8 sm:mt-14 text-[#202142]">
@@ -146,7 +146,7 @@ const EditMenu = () => {
                         <input
                             type="text"
                             id="title"
-                            className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                            className="w-full border border-gray-300 rounded px-3 py-2 bg-transparent text-customColor"
                             onChange={(e: any) => setName(e.target.value)}
                             value={name}
                         />
@@ -155,7 +155,7 @@ const EditMenu = () => {
                         <label htmlFor="description" className="block mb-2 text-sm font-medium text-indigo-900 dark:text-white">Description</label>
                         <textarea
                             id="description"
-                            className="block p-2.5 w-full text-sm text-indigo-900 bg-indigo-50 rounded-lg border border-indigo-300 focus:ring-indigo-500 focus:border-indigo-500"
+                            className="w-full border border-gray-300 rounded px-3 py-2 bg-transparent text-customColor"
                             onChange={(e: any) => setDescription(e.target.value)}
                             value={description}
                         >
@@ -166,7 +166,7 @@ const EditMenu = () => {
                         <input
                             type="text"
                             id="price"
-                            className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                            className="w-full border border-gray-300 rounded px-3 py-2 bg-transparent text-customColor"
                             onChange={(e: any) => setPrice(e.target.value)}
                             value={price}
                         />
@@ -176,12 +176,17 @@ const EditMenu = () => {
                         <select
                             name="category"
                             id="category"
-                            className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+                            className="w-full border border-gray-300 rounded px-3 py-2 bg-transparent text-customColor"
                             onChange={(e: any) => setCategory(e.target.value)}
                             value={category}
                         >
                             {allcategories.map(list => (
-                                <option key={list._id} value={list._id}>{list.name}</option>
+                                <option
+                                    className='bg-black text-white'
+                                    key={list._id}
+                                    value={list._id}>
+                                    {list.name}
+                                </option>
                             ))}
                         </select>
                     </div>
@@ -204,7 +209,7 @@ const EditMenu = () => {
 
                 </div>
             </div>
-        </>
+        </div>
 
     )
 }

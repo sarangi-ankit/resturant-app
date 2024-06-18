@@ -1,17 +1,8 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import CustomLoader from '@/app/components/layout/CustomLoader';
+
 
 export type Item = {
     _id: string;
@@ -29,6 +20,8 @@ export type Order = {
 
 const Order = () => {
     const [orders, setOrders] = useState<Order[]>([]);
+    const [loader,setLoader]=useState<boolean>(true)
+
 
     const fetchOrders = async () => {
         try {
@@ -37,8 +30,9 @@ const Order = () => {
                 throw new Error('Failed to fetch data');
             }
             const result = await response.json();
-            console.log("result", result);
+            // console.log("result", result);
             setOrders(result.orders);
+            setLoader(false)
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -46,8 +40,17 @@ const Order = () => {
 
     useEffect(() => {
         fetchOrders();
+        
     }, []);
-
+    
+    if (loader) {
+    return (
+            <div className="flex justify-center items-center min-h-screen">
+                <CustomLoader/>
+            </div>
+        );
+    }
+    
     return (
         <div className="h-screen relative overflow-x-auto shadow-md sm:rounded-lg bg-custom-gradient">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0 pb-4 my-10 px-4 md:px-20">
@@ -64,7 +67,7 @@ const Order = () => {
                                 <label htmlFor="checkbox-all-search" className="sr-only">checkbox</label>
                             </div>
                         </th>
-                        <th scope="col" className="px-6 py-3">
+                        <th scope="col" className="px-6 py-3 w-32">
                             User
                         </th>
                         <th scope="col" className="px-6 py-3">
@@ -90,10 +93,10 @@ const Order = () => {
                                     <label className="sr-only">checkbox</label>
                                 </div>
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4 w-32">
                                 {item.userId}
                             </td>
-                            <td className="px-6 py-4">
+                            <td className="px-6 py-4 w-[240px]">
                                 {item.items.map((it) => it.name).join(', ')}
                             </td>
                             <td className="px-6 py-4">
@@ -107,7 +110,7 @@ const Order = () => {
                                 )}
                             </td>
                             <td className="px-6 py-4">
-                                <button className="bg-transparent border text-white px-4 py-2 rounded-md">Show Order</button>
+                                <button className="bg-transparent border text-white px-4 py-2 rounded-md hover:bg-secondaryColor">Show Order</button>
                             </td>
                         </tr>
                     ))}

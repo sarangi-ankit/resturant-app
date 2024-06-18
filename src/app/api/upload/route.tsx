@@ -43,7 +43,7 @@ export async function POST(req: any) {
         const fileName = await uploadFileToS3(buffer, file.name);
         const imageUrl = `https://${bucket}.s3.${region}.amazonaws.com/${fileName}`;
 
-        console.log("url", imageUrl)
+        // console.log("url", imageUrl)
 
         return new Response(JSON.stringify({ success: true, imageUrl }), { status: 200 });
     } catch (error) {

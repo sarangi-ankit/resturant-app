@@ -52,7 +52,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account }: { user: any; account: any }) {
       if (account.provider === "google") {
-        console.log("clicked")
+        // console.log("clicked")
         try {
           const { name, email } = user;
           await connectDB();
@@ -64,11 +64,11 @@ export const authOptions: NextAuthOptions = {
             name: name,
             email: email,
           });
-          console.log("newuser",newUser)
+          // console.log("newuser",newUser)
           const res = await newUser.save(); 
-          console.log("res",res)
+          // console.log("res",res)
           if (res.status === 200 || res.status === 201) {
-            console.log(res)
+            // console.log(res)
             return user;
           }
 
@@ -91,7 +91,7 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
         session.user.name = token.name;
       }
-      console.log(session);
+      // console.log(session);
       return session;
     },
   },

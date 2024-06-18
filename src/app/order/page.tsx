@@ -20,7 +20,7 @@ const OrderSuccessPage = () => {
     }
 
     const { state, dispatch } = context;
-    console.log("clear", state.cart)
+    // console.log("clear", state.cart)
     const [cartOrders, setCartOrders] = useState<CartItemType[]>([]);
     const [total, setTotal] = useState<number>(0);
 
@@ -34,7 +34,7 @@ const OrderSuccessPage = () => {
 
     }, [state.cart]);
 
-    console.log("orders", cartOrders)
+    // console.log("orders", cartOrders)
     let deliveryCharge = 5.00;
     const totalWithDelivery = (total + deliveryCharge).toFixed(2);
 

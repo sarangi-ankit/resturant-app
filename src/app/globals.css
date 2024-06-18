@@ -29,4 +29,76 @@
 .bg-custom-background {
   background-image: linear-gradient(to right, #0e1118, #06201e);
 }
+/* loader */
+@layer utilities {
+  @keyframes loader-box-bounce {
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .loader__wrap {
+    @apply fixed  flex justify-center items-center w-full h-full bg-custom-gradient z-50;
+  }
+
+  .loader {
+    --sz: 7rem;
+    width: calc(var(--sz) * 2);
+    height: var(--sz);
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .loader__sq {
+    --p-sz: calc(var(--sz) / 4);
+    --m-offset: calc((var(--p-sz) * -1) * 0.75);
+    @apply relative flex items-end justify-evenly h-full w-1/2;
+
+    &::before,
+    &::after {
+      content: "";
+      @apply relative;
+      width: var(--p-sz);
+      height: var(--p-sz);
+      transform: translateY(calc((var(--sz) - var(--p-sz)) * -1));
+      animation: loader-box-bounce 0.5s cubic-bezier(0.3, 0.5, 0.4, 0.95)
+        calc(var(--i) * 0.06s) infinite alternate-reverse;
+    }
+
+    &:first-of-type {
+      margin-right: var(--m-offset);
+
+      &::before {
+        --i: 1;
+        border: 3px solid #ff7ab5;
+        border-radius: 50%;
+      }
+
+      &::after {
+        --i: 3;
+        background-color: #c643fb;
+        @supports (clip-path: circle()) {
+          clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+        }
+      }
+    }
+
+    &:nth-of-type(2) {
+      &::before {
+        --i: 2;
+        border: 3px solid #ffb650;
+      }
+
+      &::after {
+        --i: 4;
+        background-color: #2fe2dd;
+        border-radius: 50%;
+        @supports (clip-path: circle()) {
+          border-radius: 0;
+          clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+      }
+    }
+  }
+}
 

@@ -7,7 +7,7 @@ export async function POST(req: any) {
 
     try {
         const body = await req.json();
-        console.log(body)
+        // console.log(body)
         const { name,email, password } = body
         if (!name || !email || !password) {
             return Response.json({ error: 'All fields are required' },
@@ -46,7 +46,7 @@ export async function GET() {
     try {
         // Fetch all users from the database
         const users = await User.find();
-        console.log("users",users)
+        // console.log("users",users)
         // Return the list of users
         return Response.json({ users }, { status: 200 });
     } catch (error) {

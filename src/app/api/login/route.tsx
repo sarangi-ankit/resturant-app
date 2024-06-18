@@ -22,11 +22,11 @@ export async function POST(req: any) {
             return Response.json({ error: 'User does not exist' }, { status: 400 });
         }
 
-        console.log("Stored hashed password:", user.password);
+        // console.log("Stored hashed password:", user.password);
 
         const validPassword = await bcrypt.compare(password, user.password);
-        console.log("Input password:", password);
-        console.log("Is password valid?", validPassword);
+        // console.log("Input password:", password);
+        // console.log("Is password valid?", validPassword);
 
         if (!validPassword) {
             return Response.json({ error: "Invalid password" }, { status: 400 });
