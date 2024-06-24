@@ -21,8 +21,7 @@ const Header = () => {
         throw new Error("CartContext must be used within a CartProvider");
     }
     const [isLoggedIn, setIsLoggedIn] = useState(true)
-    const [isAdmin,setIsAdmin]=useState<boolean>(false)
-
+    
     useEffect(() => {
         // Check login status from localStorage when the component mounts
         const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
@@ -31,16 +30,8 @@ const Header = () => {
         } else {
             setIsLoggedIn(false);
         }
-        if (session && session.user) {
-            fetch(`/api/profile/${session.user.email}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log("data",data)
-                    setIsAdmin(data.admin);
-                });
-        }
-    }, [session]);
-    console.log("admin",isAdmin)
+    }, []);
+
     useEffect(() => {
         // This will run every time `isLoggedIn` changes
         if (!isLoggedIn) {

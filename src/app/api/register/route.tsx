@@ -40,17 +40,3 @@ export async function POST(req: any) {
     }
 }
 
-export async function GET() {
-    const conn = await connectDB();
-
-    try {
-        // Fetch all users from the database
-        const users = await User.find();
-        // console.log("users",users)
-        // Return the list of users
-        return Response.json({ users }, { status: 200 });
-    } catch (error) {
-        console.error(error);
-        return Response.json({ message: 'Server Error' }, { status: 500 });
-    }
-}

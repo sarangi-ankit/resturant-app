@@ -36,7 +36,7 @@ const MenuItems = () => {
   };
 
   return (
-    <div className="container mx-auto mt-20 px-4 py-4 ">
+    <div className="container mx-auto mt-20 px-4 py-4  ">
       <p className='text-2xl text-center font-miniver mb-5'>tasty offers</p>
       <h1 className="font-subFont text-5xl font-bold text-center mb-8 uppercase tracking-[8px]">Our Menu</h1>
       <div ref={ref} className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mx-4 md:mx-20 my-20">
@@ -62,7 +62,7 @@ const MenuItems = () => {
           </motion.div>
         ))}
       </div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-10 mb-20">
         <Link href="/menu">
           <button className="font-buttonFont bg-transparent border border-customColor text-white py-4 px-12 rounded hover:bg-secondaryColor">
             View All

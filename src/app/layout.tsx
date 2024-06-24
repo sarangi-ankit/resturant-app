@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "./components/Header";
 import { CartProvider } from "./context/Context"
 import SessionWrapper from "./components/SessionWrapper";
+import Footer from "./components/Footer";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,6 +27,7 @@ export default function RootLayout({
             <CartProvider>
               <Header />
               {children}
+              <Footer/>
             </CartProvider>
           </main>
         </body>
