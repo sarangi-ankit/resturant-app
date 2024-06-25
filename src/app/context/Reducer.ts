@@ -5,6 +5,7 @@ interface CartItem {
   image: string;
   quantity: number;
   price: number;
+  userId?: string;
 }
 
 interface CartState {
@@ -33,9 +34,11 @@ const cartReducer = (state: CartState, action: Action): CartState => {
       return { ...state, items: action.payload };
 
     case "ADD_TO_CART":
-
-      const updatedCart = [...state.cart, action.payload];
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
+      const { userId, ...rest } = action.payload;
+      const updatedCart = [...state.cart, { ...rest, userId }];
+      if (userId) {
+        localStorage.setItem(userId, JSON.stringify(updatedCart));
+      }
       return { ...state, cart: updatedCart };
 
     case "REMOVE_FROM_CART":

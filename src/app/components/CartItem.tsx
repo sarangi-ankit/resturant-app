@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { CartContext } from '../context/Context';
 import { MdDeleteOutline } from "react-icons/md";
-import { cartReducer } from '../context/Reducer'; // Importing your cartReducer
+import { cartReducer } from '../context/Reducer';
 import AdressDetails from './AddressDetails';
 
 interface CartItemType {

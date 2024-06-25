@@ -46,7 +46,7 @@ const Cart = () => {
                     <h1 className="text-3xl font-semibold mb-8">Your Cart</h1>
                     <div className="w-full flex flex-col md:flex-row gap-4 lg:gap-8 justify-center items-start">
                         <div className="w-full md:w-1/2 p-4 lg:p-8">
-                            <CartItem />
+                            <CartItem/>
                         </div>
                         <div className="w-full md:w-1/2 p-4 lg:p-8">
                             <AddressDetails />

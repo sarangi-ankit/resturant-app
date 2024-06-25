@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState, useContext } from 'react';
 import { CartContext } from "@/app/context/Context";
+import { useSession } from 'next-auth/react';
 
 interface Category {
     _id: string;
@@ -17,6 +18,8 @@ interface Menus {
 }
 
 const MenuList = ({ selectedCategory }: { selectedCategory: string }) => {
+    const { data: session, status } = useSession();
+  
     const context = useContext(CartContext);
 
     if (!context) {
@@ -43,7 +46,7 @@ const MenuList = ({ selectedCategory }: { selectedCategory: string }) => {
     };
 
     const addItemToCart = (item: any) => {
-        dispatch({ type: "ADD_TO_CART", payload: { _id: item._id, name: item.name, image: item.image, quantity: 1, price: item.price } });
+        dispatch({ type: "ADD_TO_CART", payload: { _id: item._id,name: item.name, image: item.image, quantity: 1, price: item.price } });
     };
 
     const removeCart = (itemid: any) => {
