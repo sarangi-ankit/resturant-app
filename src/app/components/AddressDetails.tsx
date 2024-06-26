@@ -9,7 +9,7 @@ const AddressDetails = () => {
         throw new Error("CartContext must be used within a CartProvider");
     }
 
-    const { state } = context;
+    const { state,dispatch } = context;
     const { cart } = state;
     const [address, setAddress] = useState({
         name: '',
@@ -86,6 +86,10 @@ const AddressDetails = () => {
 
             const result = await response.json();
             if (response.ok) {
+                // Store cart in local storage before clearing it
+                localStorage.setItem('orderCart', JSON.stringify(cart));
+                dispatch({ type: 'CLEAR_CART' });
+
                 window.location.href = result.url;
             } else {
                 console.error('Error during checkout:', result.message);

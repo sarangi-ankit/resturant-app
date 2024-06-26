@@ -30,7 +30,7 @@ const Order = () => {
                 throw new Error('Failed to fetch data');
             }
             const result = await response.json();
-            // console.log("result", result);
+            console.log("result", result);
             setOrders(result.orders);
             setLoader(false)
         } catch (error) {

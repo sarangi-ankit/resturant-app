@@ -29,33 +29,39 @@ const FlyoutCartContent = () => {
 
     return (
         <div className="w-[22rem]  bg-custom-gradient text-white p-6 shadow-xl rounded-lg">
-            <div className="mb-3 space-y-3">
-                <div className="max-h-60 overflow-y-auto">
-                    <ul className="space-y-3">
-                        {cartItems.map(product => (
-                            <li key={product._id} className="flex items-center justify-between border-b border-gray-600 pb-2">
-                                <div className="flex items-center gap-3">
-                                    <img src={product.image} className="w-12 h-12 rounded-md" alt={product.name} />
-                                    <div>
-                                        <p className="font-semibold">{product.name}</p>
-                                        <p className="text-sm text-gray-300">${product.price} x {product.quantity}</p>
-                                    </div>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div className="mt-4 border-t border-gray-600 pt-4">
-                    <p className="text-lg font-semibold">Total: ${total.toFixed(2)}</p>
-                </div>
-                <Link href="/cart">
-                    <button className="bg-customColor w-full mt-4 rounded-lg border-2 border-neutral-950 px-4 py-2 font-semibold transition-colors hover:bg-neutral-950 hover:text-white">
-                        Go to Cart
-                    </button>
-                </Link>
-            </div>
-        </div>
-    );
-}
+            {
+                cartItems.length > 0 ? (
+                    <div className="mb-3 space-y-3">
+                        <div className="max-h-60 overflow-y-auto">
+                            <ul className="space-y-3">
+                                {cartItems.map(product => (
+                                    <li key={product._id} className="flex items-center justify-between border-b border-gray-600 pb-2">
+                                        <div className="flex items-center gap-3">
+                                            <img src={product.image} className="w-12 h-12 rounded-md" alt={product.name} />
+                                            <div>
+                                                <p className="font-semibold">{product.name}</p>
+                                                <p className="text-sm text-gray-300">{product.price}.00 x {product.quantity}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        <div className="mt-4 border-t border-gray-600 pt-4">
+                            <p className="text-lg font-semibold">Total: {total.toFixed(2)}</p>
+                        </div>
+                        <Link href="/cart">
+                            <button className="bg-customColor w-full mt-4 rounded-lg border-2 border-neutral-950 px-4 py-2 font-semibold transition-colors hover:bg-neutral-950 hover:text-white">
+                                Go to Cart
+                            </button>
+                        </Link>
+                    </div>
+                ) : (
+                    <p className='text-white'>Cart is empty</p>
+                )
+            }
 
+        </div>
+    )
+}
 export default FlyoutCartContent;

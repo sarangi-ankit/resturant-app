@@ -44,6 +44,9 @@ const FlyoutUserContent = () => {
                         <Link href="/admin/order" className="block text-sm hover:underline">
                             Orders
                         </Link>
+                        <Link href="/admin/users" className="block text-sm hover:underline">
+                            Users
+                        </Link>
                     </>
 
                 )}

@@ -46,35 +46,37 @@ const cartReducer = (state: CartState, action: Action): CartState => {
       localStorage.setItem("cart", JSON.stringify(filterCart));
       return { ...state, cart: filterCart };
 
-   case "CART_QUANTITY":
-    // Find the item in the cart and update its quantity
-    const cartQuantity = state.cart.map(item => {
+    case "CART_QUANTITY":
+      // Find the item in the cart and update its quantity
+      const cartQuantity = state.cart.map(item => {
         if (item._id === action.payload._id) {
-            let updatedQuantity = item.quantity;
-            if (action.payload.quantity > 0) {
-                // Increment quantity
-                updatedQuantity += action.payload.quantity;
-            } else {
-                // Decrement quantity, ensure it doesn't go below 1
-                updatedQuantity = Math.max(1, item.quantity + action.payload.quantity);
-            }
-            return { ...item, quantity: updatedQuantity };
+          let updatedQuantity = item.quantity;
+          if (action.payload.quantity > 0) {
+            // Increment quantity
+            updatedQuantity += action.payload.quantity;
+          } else {
+            // Decrement quantity, ensure it doesn't go below 1
+            updatedQuantity = Math.max(1, item.quantity + action.payload.quantity);
+          }
+          return { ...item, quantity: updatedQuantity };
         }
         return item;
-    });
+      });
 
-    localStorage.setItem("cart", JSON.stringify(cartQuantity));
-    return { ...state, cart: cartQuantity };
+      localStorage.setItem("cart", JSON.stringify(cartQuantity));
+      return { ...state, cart: cartQuantity };
 
 
     case "INITIALIZE_CART":
       return { ...state, cart: action.payload };
-    default:
-      return state;
-    
+
     case "CLEAR_CART":
       localStorage.removeItem("cart");
       return { ...state, cart: [] };
+    default:
+      return state;
+
+
   }
 };
 

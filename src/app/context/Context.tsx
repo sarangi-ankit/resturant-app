@@ -14,7 +14,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
   
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
-  const userId = session?.user?.email || ""; // Default to empty string if userId is undefined
+  const userId = session?.user?.email || "";
   const cartKey = userId ? `cart_${userId}` : "";
   
   useEffect(() => {

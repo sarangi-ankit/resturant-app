@@ -5,21 +5,19 @@ import { getDataFromToken } from "@/helper/getDataFromToken";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/authOption";
 
-
+// get users based on email
 export async function GET(req: any) {
     await connectDB();
     const url = new URL(req.url);
-    // console.log("url",url)
     const emailParam = url.searchParams.get('email');
-   
-    
+
+
     let filterUser = {};
     if (emailParam) {
         filterUser = { email: emailParam };
     } else {
         const session = await getServerSession(authOptions);
         const email = session?.user?.email;
-        // console.log("email1",email)
         if (!email) {
             return new Response(JSON.stringify({}), { status: 400 });
         }
@@ -27,15 +25,16 @@ export async function GET(req: any) {
     }
 
     const user = await User.findOne(filterUser).lean();
-    // console.log("user",user)
     if (!user) {
         return new Response(JSON.stringify({ message: 'User not found' }), { status: 404 });
     }
-
     return new Response(JSON.stringify(user), { status: 200 });
 }
 
+// get all users
 
+
+// update user
 export async function PUT(req: any) {
     await connectDB();
 

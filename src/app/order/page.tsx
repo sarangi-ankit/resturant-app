@@ -20,21 +20,23 @@ const OrderSuccessPage = () => {
     }
 
     const { state, dispatch } = context;
-    // console.log("clear", state.cart)
     const [cartOrders, setCartOrders] = useState<CartItemType[]>([]);
     const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
-        // Store the current cart in local state
-        setCartOrders(state.cart as CartItemType[]);
+        // Retrieve the cart from local storage
+        const storedCart = localStorage.getItem('orderCart');
+        if (storedCart) {
+            const parsedCart = JSON.parse(storedCart) as CartItemType[];
+            setCartOrders(parsedCart);
+            // Calculate total price
+            const totalPrice = parsedCart.reduce((total, item) => total + item.price * item.quantity, 0);
+            setTotal(totalPrice);
+            // Clear the local storage
+            localStorage.removeItem('orderCart');
+        }
+    }, []);
 
-        // Calculate total price
-        const totalPrice = state.cart.reduce((total, item) => total + item.price * item.quantity, 0);
-        setTotal(totalPrice);
-
-    }, [state.cart]);
-
-    // console.log("orders", cartOrders)
     let deliveryCharge = 5.00;
     const totalWithDelivery = (total + deliveryCharge).toFixed(2);
 
